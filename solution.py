@@ -69,8 +69,16 @@ recommended_movies = get_movie_recommendations('Alice')
 # CLI implementation
 def show_recommendations():
     print("Welcome to the Movie Recommendation System!")
-    user_name = input("Please enter your name: ")
-    
+
+    users = list(train_data['User'].value_counts().index)
+
+    user_name = input("Please enter your name: ").capitalize()
+    # print(user_name in users)
+
+    while user_name not in users:
+        print(f'Choose a user from the following list: {users}')
+        user_name = input("Please enter your name: ").capitalize()
+
     # Get movie recommendations for the user
     recommendations = get_movie_recommendations(user_name)
     
@@ -82,3 +90,4 @@ def show_recommendations():
     print("--------------------------------------------------------")
 
 show_recommendations()
+# print(list(train_data['User'].value_counts().index))
